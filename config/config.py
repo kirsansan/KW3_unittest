@@ -1,0 +1,1 @@
+FILE_FOR_TRANSACTIONS = './jsondata/transactions.json'
