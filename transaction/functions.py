@@ -1,4 +1,4 @@
-from .transaction import Transaction
+from transaction import Transaction
 
 
 def create_list_of_transactions_from_long_data(some_data_from_json) -> list[Transaction:]:
