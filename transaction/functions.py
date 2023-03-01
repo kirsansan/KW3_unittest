@@ -2,6 +2,7 @@ from transaction.transaction import Transaction
 # import datetime
 from datetime import datetime
 
+
 def create_list_of_transactions_from_long_data(some_data_from_json) -> list[Transaction:]:
     """read from_long_data and fill objects like class QTransaction then append it to the list
     this list will be returned
@@ -17,7 +18,6 @@ def create_list_of_transactions_from_long_data(some_data_from_json) -> list[Tran
     :param some_data_from_json: some data which load from json format
     :return: list of Transaction
     """
-
     trans_list = []
     for tmp_data in some_data_from_json:
         if 'from' in tmp_data.keys():  # because don't exist this fill in CREATE ACCOUNT operations
@@ -47,7 +47,6 @@ def convert_string_to_date(date_in_str_format: str):
     # datetime.strptime(date_in_str_format, "%Y-%m-%dT%H:%")
 
 
-
 def mask_number_of_card(card_info_in_string_format: str) -> str:
     """
     hide part of card or part of account number
@@ -58,7 +57,7 @@ def mask_number_of_card(card_info_in_string_format: str) -> str:
     is_account = False
 
     for word in card_info_in_string_format.split():
-        if word.lower() in ["счет", "счёт"]:    # different hide procedure for account and card number
+        if word.lower() in ["счет", "счёт"]:  # different hide procedure for account and card number
             is_account = True
         if word.isdigit() and len(word) >= 16:  # only for long digits
             if is_account:
@@ -101,7 +100,6 @@ def main():
     print(mask_number_of_card("Master card 1234567812345678"))
     print(mask_number_of_card("Счет 5897568975678965798657986897"))
 
-    # print(create_list_of_transactions_from_long_data(some_data_from_json))
 
 if __name__ == '__main__':
     main()

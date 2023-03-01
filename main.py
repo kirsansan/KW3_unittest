@@ -11,6 +11,7 @@ from pprint import pprint
 
 def prepare_to_print(transaction):
     """
+    Prepared data for printing
     Пример вывода для одной операции:
     14.10.2018 Перевод организации
     Visa Platinum 7000 79** **** 6361 -> Счет **9638
@@ -44,6 +45,7 @@ def main():
         if transaction.state == 'EXECUTED': # only executed will be printed
             counter_while -= 1
             print(prepare_to_print(transaction))
+            print("")
 
 
 if __name__ == '__main__':
