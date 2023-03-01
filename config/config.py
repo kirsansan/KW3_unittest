@@ -1,1 +1,2 @@
 FILE_FOR_TRANSACTIONS = './jsondata/transactions.json'
+NUMBER_OF_TRANSACTIONS_FOR_PRINT = 5

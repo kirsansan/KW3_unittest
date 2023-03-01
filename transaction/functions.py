@@ -1,5 +1,6 @@
-from transaction import Transaction
-
+from transaction.transaction import Transaction
+# import datetime
+from datetime import datetime
 
 def create_list_of_transactions_from_long_data(some_data_from_json) -> list[Transaction:]:
     """read from_long_data and fill objects like class QTransaction then append it to the list
@@ -16,6 +17,7 @@ def create_list_of_transactions_from_long_data(some_data_from_json) -> list[Tran
     :param some_data_from_json: some data which load from json format
     :return: list of Transaction
     """
+
     trans_list = []
     for tmp_data in some_data_from_json:
         if 'from' in tmp_data.keys():  # because don't exist this fill in CREATE ACCOUNT operations
@@ -25,7 +27,7 @@ def create_list_of_transactions_from_long_data(some_data_from_json) -> list[Tran
         if tmp_data == {}:
             continue
         one_transaction: Transaction = Transaction(id=tmp_data['id'],
-                                                   date=tmp_data['date'],
+                                                   date=str(tmp_data['date']),
                                                    description=tmp_data['description'],
                                                    from_=tmp_from_,
                                                    to_=tmp_data['to'],
@@ -36,7 +38,14 @@ def create_list_of_transactions_from_long_data(some_data_from_json) -> list[Tran
 
 
 def convert_string_to_date(date_in_str_format: str):
-    print(date_in_str_format)
+    """
+    convert string to date
+    :param date_in_str_format:
+    :return: date
+    """
+    return datetime.strptime(date_in_str_format, "%Y-%m-%dT%H:%M:%S.%f")
+    # datetime.strptime(date_in_str_format, "%Y-%m-%dT%H:%")
+
 
 
 def mask_number_of_card(card_info_in_string_format: str) -> str:
@@ -92,6 +101,7 @@ def main():
     print(mask_number_of_card("Master card 1234567812345678"))
     print(mask_number_of_card("Счет 5897568975678965798657986897"))
 
+    # print(create_list_of_transactions_from_long_data(some_data_from_json))
 
 if __name__ == '__main__':
     main()
