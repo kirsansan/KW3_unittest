@@ -1,5 +1,4 @@
 from transaction.transaction import Transaction
-# import datetime
 from datetime import datetime
 
 
@@ -44,7 +43,6 @@ def convert_string_to_date(date_in_str_format: str):
     :return: date
     """
     return datetime.strptime(date_in_str_format, "%Y-%m-%dT%H:%M:%S.%f")
-    # datetime.strptime(date_in_str_format, "%Y-%m-%dT%H:%")
 
 
 def mask_number_of_card(card_info_in_string_format: str) -> str:
@@ -53,7 +51,7 @@ def mask_number_of_card(card_info_in_string_format: str) -> str:
     :param card_info_in_string_format:
     :return: string with hide part of number
     """
-    temp_string_for_return = ""
+    temp_string_for_return = card_info_in_string_format
     is_account = False
 
     for word in card_info_in_string_format.split():
@@ -61,11 +59,13 @@ def mask_number_of_card(card_info_in_string_format: str) -> str:
             is_account = True
         if word.isdigit() and len(word) >= 16:  # only for long digits
             if is_account:
-                temp_string_for_return += account_number_hide(word)
+                temp_string_for_return = card_info_in_string_format.replace(word, account_number_hide(word))
             else:
-                temp_string_for_return += card_number_chop_and_hide(word)
+                temp_string_for_return = card_info_in_string_format.replace(word, card_number_chop_and_hide(word))
         else:
-            temp_string_for_return += word + " "
+            # temp_string_for_return += word
+            # temp_string_for_return = " ".join([temp_string_for_return, word])
+            pass
     return temp_string_for_return
 
 
@@ -80,19 +80,21 @@ def account_number_hide(number_as_string: str) -> str:
 
 def card_number_chop_and_hide(number_as_string: str) -> str:
     """
-    hide body of number
+    hide body of number with separate on 4-digits blocks
     :param number_as_string:
-    :return: copped and hided number
+    :return: hided number (number will be chop and part of number will be hide)
     """
+    if not number_as_string.isdigit():
+        return number_as_string
     if len(number_as_string) == 16:
         return number_as_string[:4] + " " + number_as_string[4:6] + "** **** " + number_as_string[-4:]
-    elif len(number_as_string) == 18:
-        return number_as_string[:4] + " " + number_as_string[4:6] + "** **** " + number_as_string[-6:]
+    elif len(number_as_string) >= 17:
+        return number_as_string[:4] + " " + number_as_string[4:6] + "** **** " + number_as_string[12:len(number_as_string)]
     else:
         return number_as_string
 
 
-def main():
+def test():
     print(account_number_hide("497854789788970"))
     print(card_number_chop_and_hide("1234567812345678"))
     print(card_number_chop_and_hide("123456781234567800"))
@@ -102,4 +104,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    test()
