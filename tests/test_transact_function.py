@@ -62,7 +62,7 @@ class CreateListTransaction(TestCase):
         self.assertEqual(create_list_of_transactions_from_long_data(test_data)[0].__repr__(), tr.__repr__())
 
     def test_create_list_transaction_wo_anything(self):
-        test_data = [{}, TEST_DATA_BLOCK]
+        test_data = [{}, TEST_DATA_BLOCK_FULL]
         tr = Transaction("2019-08-16T04:23:41.621065",
                          "qwer", "",
                          "Счет 96119739109420349721", "EXECUTED",
