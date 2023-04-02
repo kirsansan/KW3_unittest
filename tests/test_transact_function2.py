@@ -5,7 +5,7 @@ import transaction.functions
 from transaction.functions import mask_number_of_card, account_number_hide, convert_string_to_date
 
 
-class Test_CardNumber(TestCase):
+class TestCardNumber(TestCase):
     def test_card_num(self):
         self.assertEqual(transaction.functions.card_number_chop_and_hide("abcd"), "abcd")
         self.assertEqual(transaction.functions.card_number_chop_and_hide("1"), "1")
@@ -20,6 +20,6 @@ class Test_CardNumber(TestCase):
         self.assertEqual(account_number_hide("12345678901234567890"), "**7890")
 
 
-class Test_ConvertStringToDate(TestCase):
+class TestConvertStringToDate(TestCase):
     def test_convert_string_to_date(self):
         self.assertEqual(str(convert_string_to_date("2018-08-17T03:57:28.607101")), "2018-08-17 03:57:28.607101")
