@@ -88,20 +88,21 @@ def card_number_chop_and_hide(number_as_string: str) -> str:
         return number_as_string
     if len(number_as_string) == 16:
         return number_as_string[:4] + " " + number_as_string[4:6] + "** **** " + number_as_string[-4:]
-    elif len(number_as_string) >= 17:
-        return number_as_string[:4] + " " + number_as_string[4:6] + "** **** " + number_as_string[12:len(number_as_string)]
-    else:
+    if len(number_as_string) >= 17:
+        return number_as_string[:4] + " " + number_as_string[4:6] \
+            + "** **** " + number_as_string[12:len(number_as_string)]
+    else:   # len < 16
         return number_as_string
 
-
-def test():
-    print(account_number_hide("497854789788970"))
-    print(card_number_chop_and_hide("1234567812345678"))
-    print(card_number_chop_and_hide("123456781234567800"))
-    print(mask_number_of_card("Maestro 1234567812345678"))
-    print(mask_number_of_card("Master card 1234567812345678"))
-    print(mask_number_of_card("Счет 5897568975678965798657986897"))
-
-
-if __name__ == '__main__':
-    test()
+#
+# def selftest():
+#     print(account_number_hide("497854789788970"))
+#     print(card_number_chop_and_hide("1234567812345678"))
+#     print(card_number_chop_and_hide("123456781234567800"))
+#     print(mask_number_of_card("Maestro 1234567812345678"))
+#     print(mask_number_of_card("Master card 1234567812345678"))
+#     print(mask_number_of_card("Счет 5897568975678965798657986897"))
+#
+#
+# if __name__ == '__main__':
+#     selftest()

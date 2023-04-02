@@ -1,0 +1,17 @@
+[
+  {
+    "id": 86608620,
+    "state": "EXECUTED",
+    "date": "2019-08-16T04:23:41.621065",
+    "operationAmount": {
+      "amount": "6004.00",
+      "currency": {
+        "name": "руб.",
+        "code": "RUB"
+      }
+    },
+    "description": "Перевод с карты на счет",
+    "from": "MasterCard 8826230888662405",
+    "to": "Счет 96119739109420349721"
+  }
+]

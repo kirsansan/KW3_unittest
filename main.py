@@ -3,11 +3,13 @@
 
 from jsondata.utils import load_from_json_file
 from transaction.transaction import Transaction
-from transaction.functions import create_list_of_transactions_from_long_data, convert_string_to_date, mask_number_of_card
+from transaction.functions import create_list_of_transactions_from_long_data, convert_string_to_date, \
+    mask_number_of_card
 from config.config import FILE_FOR_TRANSACTIONS, NUMBER_OF_TRANSACTIONS_FOR_PRINT
 from pprint import pprint
 
-#from transaction.transaction import Transaction
+
+# from transaction.transaction import Transaction
 
 def prepare_to_print(transaction):
     """
@@ -23,6 +25,7 @@ def prepare_to_print(transaction):
     {mask_number_of_card(transaction.from_)} -> {mask_number_of_card(transaction.to_)}  
     {transaction.get_amount_human_mode()} {transaction.operation_amount['currency']['name']} """
 
+
 def main():
     print(f'Hi, gays! Do you want to see five last executed transactions?')
 
@@ -33,16 +36,13 @@ def main():
     transactions_list = create_list_of_transactions_from_long_data(non_seek_data)
 
     # sort the list
-    transactions_list.sort(key=lambda x: convert_string_to_date(x.date),reverse=True)
-
-    # debug the transactions
-    # pprint(transactions_list[:6])
+    transactions_list.sort(key=lambda x: convert_string_to_date(x.date), reverse=True)
 
     counter_while = NUMBER_OF_TRANSACTIONS_FOR_PRINT
     for transaction in transactions_list:
         if counter_while == 0:
             break
-        if transaction.state == 'EXECUTED': # only executed will be printed
+        if transaction.state == 'EXECUTED':  # only executed will be printed
             counter_while -= 1
             print(prepare_to_print(transaction))
             print("")
