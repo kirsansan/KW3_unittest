@@ -23,7 +23,7 @@ def create_list_of_transactions_from_long_data(some_data_from_json) -> list[Tran
             tmp_from_ = tmp_data['from']
         else:
             tmp_from_ = ""
-        if tmp_data == {}:
+        if tmp_data == {}:              # protect from empty data block between other data blocks
             continue
         one_transaction: Transaction = Transaction(id=tmp_data['id'],
                                                    date=str(tmp_data['date']),
